@@ -1,9 +1,8 @@
 from textnode import TextNode
+from htmlnode import HTMLNode
 
 
-def main():
-    test_text_node = TextNode("This is a text node", "link", "www.textlink.com")
-    print(test_text_node)
+def main(): ...
 
 
 if __name__ == "__main__":
