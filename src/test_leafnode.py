@@ -13,3 +13,7 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(
             node.to_html(), '<a href="https://www.google.com">Click me!</a>'
         )
+
+
+if __name__ == "__main__":
+    unittest.main()
