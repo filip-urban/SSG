@@ -14,6 +14,10 @@ class TestTextNode(unittest.TestCase):
             node.to_html(), '<a href="https://www.google.com">Click me!</a>'
         )
 
+    def test_leaf_to_html_no_tag(self):
+        node = LeafNode(None, "Stuff")
+        self.assertEqual(node.to_html(), "Stuff")
+
 
 if __name__ == "__main__":
     unittest.main()

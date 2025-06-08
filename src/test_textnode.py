@@ -25,24 +25,24 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(node, node2)
 
     def test_repr(self):
-        text = "This is a text node"
-        text_type = TextType.BOLD
-        node = TextNode(f"{text}", text_type)
-        self.assertEqual(node.__repr__(), f"TextNode({text}, {text_type.value})")
+        node = TextNode("This is a text node", TextType.BOLD)
+        self.assertEqual(
+            node.__repr__(),
+            f"TextNode(This is a text node, {TextType.BOLD.value})",
+        )
 
     def test_repr2(self):
-        text = "This is a text node"
-        text_type = TextType.LINK
-        node = TextNode(f"{text}", text_type)
-        self.assertEqual(node.__repr__(), f"TextNode({text}, {text_type.value})")
+        node = TextNode("This is a text node", TextType.LINK)
+        self.assertEqual(
+            node.__repr__(),
+            f"TextNode(This is a text node, {TextType.LINK.value})",
+        )
 
     def test_repr3(self):
-        text = "This is a text node"
-        text_type = TextType.LINK
-        link = "www.testlink.com"
-        node = TextNode(f"{text}", text_type, f"{link}")
+        node = TextNode("This is a text node", TextType.LINK, "www.testlink.com")
         self.assertEqual(
-            node.__repr__(), f"TextNode({text}, {text_type.value}, {link})"
+            node.__repr__(),
+            f"TextNode(This is a text node, {TextType.LINK.value}, www.testlink.com)",
         )
 
 
