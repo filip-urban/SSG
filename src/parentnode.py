@@ -9,9 +9,9 @@ class ParentNode(HTMLNode):
 
     def to_html(self):
         if not self.tag:
-            raise ValueError()
+            raise ValueError("invalid HTML: missing tag")
         if not self.children:
-            raise ValueError()
+            raise ValueError("invalid HTML: missing children")
         result = ""
         for node in self.children:
             result += node.to_html()
