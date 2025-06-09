@@ -14,7 +14,9 @@ class TextNode:
     def __init__(self, text, text_type, url=None):
         self.text = text
         self.text_type = TextType(text_type)
-        self.url = url if text_type == TextType.LINK else None
+        self.url = (
+            url if (text_type == TextType.LINK or text_type == TextType.IMAGE) else None
+        )
 
     def __eq__(self, other):
         if (
