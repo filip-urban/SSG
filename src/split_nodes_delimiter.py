@@ -5,7 +5,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
     nodes_result = []
     for node in old_nodes:
         if node.text_type != TextType.TEXT:
-            nodes_result.extend(node)
+            nodes_result.extend([node])
             continue
         text = node.text
         while text:
