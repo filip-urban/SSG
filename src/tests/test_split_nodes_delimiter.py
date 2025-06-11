@@ -12,9 +12,19 @@ class Testsplit_nodes_delimiter(unittest.TestCase):
     def test_inline_only(self):
         node = TextNode("**bolded text**", TextType.TEXT)
         self.assertEqual(
-            split_nodes_delimiter([node], "`", TextType.BOLD),
+            split_nodes_delimiter([node], "**", TextType.BOLD),
             [
                 TextNode("bolded text", TextType.BOLD),
+            ],
+        )
+
+    def test_inline_left(self):
+        node = TextNode("**Bolded text** and normal text", TextType.TEXT)
+        self.assertEqual(
+            split_nodes_delimiter([node], "**", TextType.BOLD),
+            [
+                TextNode("Bolded text", TextType.BOLD),
+                TextNode(" and normal text", TextType.TEXT),
             ],
         )
 
