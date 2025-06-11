@@ -1,4 +1,7 @@
 import unittest
+import sys
+
+sys.path.append("src")
 
 from text_node_to_html_node import text_node_to_html_node
 from textnode import TextNode, TextType
