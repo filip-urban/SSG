@@ -90,6 +90,19 @@ class Test_split_nodes(unittest.TestCase):
             new_nodes,
         )
 
+    def test_split_image_no_image(self):
+        node = TextNode(
+            "This is text",
+            TextType.TEXT,
+        )
+        new_nodes = split_nodes_image([node])
+        self.assertListEqual(
+            [
+                TextNode("This is text", TextType.TEXT),
+            ],
+            new_nodes,
+        )
+
     def test_split_link(self):
         node = TextNode(
             "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)",
@@ -104,6 +117,19 @@ class Test_split_nodes(unittest.TestCase):
                 TextNode(
                     "to youtube", TextType.LINK, "https://www.youtube.com/@bootdotdev"
                 ),
+            ],
+            new_nodes,
+        )
+
+    def test_split_link_no_link(self):
+        node = TextNode(
+            "This is text",
+            TextType.TEXT,
+        )
+        new_nodes = split_nodes_link([node])
+        self.assertListEqual(
+            [
+                TextNode("This is text", TextType.TEXT),
             ],
             new_nodes,
         )

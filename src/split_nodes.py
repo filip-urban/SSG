@@ -10,6 +10,7 @@ def split_nodes_image(old_nodes):
             continue
         images = extract_markdown_images(node.text)
         if not images:
+            new_nodes.append(node)
             continue
         for image in images:
             delimiter = f"![{image[0]}]({image[1]})"
@@ -30,6 +31,7 @@ def split_nodes_link(old_nodes):
             continue
         links = extract_markdown_links(node.text)
         if not links:
+            new_nodes.append(node)
             continue
         for link in links:
             delimiter = f"[{link[0]}]({link[1]})"
