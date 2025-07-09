@@ -20,9 +20,9 @@ def is_ordered_list(text):
 
 
 def block_to_block_type(block):
-    if block[0] == "#":
+    if block.startswith(("# ", "## ", "### ", "#### ", "##### ", "###### ")):
         return BlockType.HEADING
-    if block[:3] == "```" and block[-3:] == "```":
+    if len(block) > 6 and block[:3] == "```" and block[-3:] == "```":
         return BlockType.CODE
     if len(block.split("\n")) == len(
         list(filter(lambda x: x[0] == ">" if x else True, block.split("\n")))
