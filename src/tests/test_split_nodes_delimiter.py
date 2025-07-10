@@ -3,7 +3,7 @@ import sys
 
 sys.path.append("src")
 
-from split_nodes_delimiter import split_nodes_delimiter
+from split_nodes import split_nodes_delimiter
 from textnode import TextNode, TextType
 
 
