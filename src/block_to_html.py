@@ -63,7 +63,7 @@ def create_html_nodes_from_block(block_type, block):
             text_node = TextNode(block[4:-3], TextType.CODE)
             return ParentNode("pre", [text_node_to_html_node(text_node)])
         case BlockType.QUOTE:
-            return ParentNode("blockquote", create_child_nodes(block[2:]))
+            return ParentNode("blockquote", create_child_nodes(block.replace("> ", "")))
         case BlockType.UNORDERED_LIST:
             return ParentNode("ul", create_unordered_list(block))
         case BlockType.ORDERED_LIST:
