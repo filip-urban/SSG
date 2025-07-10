@@ -3,11 +3,10 @@ import sys
 
 sys.path.append("src")
 
-from parentnode import ParentNode
-from leafnode import LeafNode
+from htmlnode import ParentNode, LeafNode
 
 
-class TestTextNode(unittest.TestCase):
+class TestParentNode(unittest.TestCase):
     def test_to_html_with_children(self):
         child_node = LeafNode("span", "child")
         parent_node = ParentNode("div", [child_node])

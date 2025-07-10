@@ -3,10 +3,10 @@ import sys
 
 sys.path.append("src")
 
-from leafnode import LeafNode
+from htmlnode import LeafNode
 
 
-class TestTextNode(unittest.TestCase):
+class TestLeafNode(unittest.TestCase):
     def test_leaf_to_html_p(self):
         node = LeafNode("p", "This is a paragraph of text.")
         self.assertEqual(node.to_html(), "<p>This is a paragraph of text.</p>")
