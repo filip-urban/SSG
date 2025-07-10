@@ -3,7 +3,7 @@ import sys
 
 sys.path.append("src")
 
-from blocktype import block_to_block_type, BlockType
+from markdown_to_blocks import block_to_block_type, BlockType
 
 
 class Testblock_to_block_type(unittest.TestCase):
