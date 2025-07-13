@@ -1,5 +1,3 @@
-import re
-
 from markdown_to_blocks import markdown_to_blocks
 from markdown_to_blocks import block_to_block_type, BlockType
 from text_to_textnodes import text_to_textnodes
