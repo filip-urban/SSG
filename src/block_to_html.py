@@ -18,27 +18,13 @@ def create_child_nodes(text):
     return html_nodes
 
 
-# !rewrite this! split by newlines and instead iterate a slice [2:]
-def create_unordered_list(text):
-    html_nodes = []
-    for item in text.split("- "):
-        if not item:
-            continue
-        list_node = ParentNode("li", [])
-        text_nodes = text_to_textnodes(item.replace("\n", ""))
-        for text_node in text_nodes:
-            list_node.children.append(text_node_to_html_node(text_node))
-        html_nodes.append(list_node)
-    return html_nodes
-
-
-def create_ordered_list(text):
+def create_list(text, list_chars):
     html_nodes = []
     for line in text.split("\n"):
         if not line:
             continue
         list_node = ParentNode("li", [])
-        text_nodes = text_to_textnodes(line[3:])
+        text_nodes = text_to_textnodes(line[list_chars:].replace("\n", " "))
         for text_node in text_nodes:
             list_node.children.append(text_node_to_html_node(text_node))
         html_nodes.append(list_node)
@@ -46,6 +32,8 @@ def create_ordered_list(text):
 
 
 def create_html_nodes_from_block(block_type, block):
+    U_LIST_BULLET_SIZE = 2
+    O_LIST_BULLET_SIZE = 3
     match block_type:
         case BlockType.HEADING:
             heading_level = 1
@@ -66,9 +54,9 @@ def create_html_nodes_from_block(block_type, block):
             # !rewrite this! create new function, split by newlines and instead iterate a slice [2:]
             return ParentNode("blockquote", create_child_nodes(block.replace("> ", "")))
         case BlockType.UNORDERED_LIST:
-            return ParentNode("ul", create_unordered_list(block))
+            return ParentNode("ul", create_list(block, U_LIST_BULLET_SIZE))
         case BlockType.ORDERED_LIST:
-            return ParentNode("ol", create_ordered_list(block))
+            return ParentNode("ol", create_list(block, O_LIST_BULLET_SIZE))
 
 
 def markdown_to_html_node(markdown):
