@@ -18,6 +18,7 @@ def create_child_nodes(text):
     return html_nodes
 
 
+# !rewrite this! split by newlines and instead iterate a slice [2:]
 def create_unordered_list(text):
     html_nodes = []
     for item in text.split("- "):
@@ -33,12 +34,11 @@ def create_unordered_list(text):
 
 def create_ordered_list(text):
     html_nodes = []
-    regex = r"\d. "
-    for item in re.split(regex, text):
-        if not item:
+    for line in text.split("\n"):
+        if not line:
             continue
         list_node = ParentNode("li", [])
-        text_nodes = text_to_textnodes(item.replace("\n", ""))
+        text_nodes = text_to_textnodes(line[3:])
         for text_node in text_nodes:
             list_node.children.append(text_node_to_html_node(text_node))
         html_nodes.append(list_node)
@@ -63,6 +63,7 @@ def create_html_nodes_from_block(block_type, block):
             text_node = TextNode(block[4:-3], TextType.CODE)
             return ParentNode("pre", [text_node_to_html_node(text_node)])
         case BlockType.QUOTE:
+            # !rewrite this! create new function, split by newlines and instead iterate a slice [2:]
             return ParentNode("blockquote", create_child_nodes(block.replace("> ", "")))
         case BlockType.UNORDERED_LIST:
             return ParentNode("ul", create_unordered_list(block))
