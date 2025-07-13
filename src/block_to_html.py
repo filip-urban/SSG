@@ -31,6 +31,11 @@ def create_list(text, list_chars):
     return html_nodes
 
 
+def create_blockquote(block):
+    text_list = [line[2:] for line in block.split("\n")]
+    return create_child_nodes(" ".join(text_list))
+
+
 def create_html_nodes_from_block(block_type, block):
     U_LIST_BULLET_SIZE = 2
     O_LIST_BULLET_SIZE = 3
@@ -51,8 +56,7 @@ def create_html_nodes_from_block(block_type, block):
             text_node = TextNode(block[4:-3], TextType.CODE)
             return ParentNode("pre", [text_node_to_html_node(text_node)])
         case BlockType.QUOTE:
-            # !rewrite this! create new function, split by newlines and instead iterate a slice [2:]
-            return ParentNode("blockquote", create_child_nodes(block.replace("> ", "")))
+            return ParentNode("blockquote", create_blockquote(block))
         case BlockType.UNORDERED_LIST:
             return ParentNode("ul", create_list(block, U_LIST_BULLET_SIZE))
         case BlockType.ORDERED_LIST:
