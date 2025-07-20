@@ -1,8 +1,9 @@
-from textnode import TextNode
-from htmlnode import HTMLNode
+from copy_content import *
+import os
 
 
-def main(): ...
+def main():
+    copy_files("static/", "public/")
 
 
 if __name__ == "__main__":
