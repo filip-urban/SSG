@@ -14,8 +14,6 @@ def copy_files(source, destination):
     clean_directory(destination)
     files = get_list_of_source_paths(source)
     for file in files:
-        print(file)
-    for file in files:
         destination_file_path = file.replace(source, destination, 1)
         if file[-1] == "/":
             print(f"new dirctory: {destination_file_path}")
