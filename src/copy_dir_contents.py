@@ -3,6 +3,8 @@ import shutil
 
 
 def clean_directory(directory_path):
+    if directory_path[-1] != "/":
+        directory_path += "/"
     for file in os.listdir(directory_path):
         if os.path.isfile(directory_path + file):
             os.remove(directory_path + file)
