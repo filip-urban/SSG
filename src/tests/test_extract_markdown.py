@@ -1,9 +1,15 @@
 import unittest
 import sys
+import os
+
 
 sys.path.append("src")
 
-from extract_markdown import extract_markdown_images, extract_markdown_links
+from extract_markdown import (
+    extract_markdown_images,
+    extract_markdown_links,
+    extract_title,
+)
 
 
 class Testextract_markdown(unittest.TestCase):
@@ -31,6 +37,30 @@ class Testextract_markdown(unittest.TestCase):
         self.assertListEqual(
             [("link", "www.google.com"), ("different link", "www.youtube.com")], matches
         )
+
+    def test_extract_title(self):
+        md_file = "test_extract_title.md"
+        markdown = """#   important heading   
+some text
+more text"""
+        with open(md_file, "w+") as fh:
+            fh.write(markdown)
+
+        self.assertEqual("important heading", extract_title(md_file))
+        os.remove(md_file)
+
+    def test_extract_title_exception(self):
+        md_file = "test_extract_title.md"
+        markdown = """## heading   
+some text
+more text"""
+        with open(md_file, "w+") as fh:
+            fh.write(markdown)
+
+        with self.assertRaises(Exception):
+            extract_title(md_file)
+
+        os.remove(md_file)
 
 
 if __name__ == "__main__":
