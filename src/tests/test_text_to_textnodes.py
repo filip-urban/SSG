@@ -29,6 +29,12 @@ class Testtext_to_textnodes(unittest.TestCase):
             ],
         )
 
+    def test_text_to_textnodes_link(self):
+        text = "[Home](/)"
+        self.assertListEqual(
+            text_to_textnodes(text), [TextNode("Home", TextType.LINK, "/")]
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

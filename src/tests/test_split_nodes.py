@@ -134,6 +134,42 @@ class Test_split_nodes(unittest.TestCase):
             new_nodes,
         )
 
+    def test_split_image_only(self):
+        nodes = [TextNode("![My image](/images/my_image.png)", TextType.TEXT)]
+        self.assertListEqual(
+            split_nodes_image(nodes),
+            [
+                TextNode("My image", TextType.IMAGE, "/images/my_image.png"),
+            ],
+        )
+
+    def test_split_image_multiple_images(self):
+        nodes = [
+            TextNode(
+                "![First image](/images/first_image.png) and ![Second image](/images/second_image.png) and one more ![Third image](/images/third_image.png)",
+                TextType.TEXT,
+            )
+        ]
+        self.assertListEqual(
+            split_nodes_image(nodes),
+            [
+                TextNode("First image", TextType.IMAGE, "/images/first_image.png"),
+                TextNode(" and ", TextType.TEXT),
+                TextNode("Second image", TextType.IMAGE, "/images/second_image.png"),
+                TextNode(" and one more ", TextType.TEXT),
+                TextNode("Third image", TextType.IMAGE, "/images/third_image.png"),
+            ],
+        )
+
+    def test_split_link_only(self):
+        nodes = [TextNode("[Home](/)", TextType.TEXT)]
+        self.assertListEqual(
+            split_nodes_link(nodes),
+            [
+                TextNode("Home", TextType.LINK, "/"),
+            ],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

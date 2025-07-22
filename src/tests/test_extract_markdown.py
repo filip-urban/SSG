@@ -13,6 +13,15 @@ from extract_markdown import (
 
 
 class Testextract_markdown(unittest.TestCase):
+
+    def test_extract_markdown_images_image_only(self):
+        matches = extract_markdown_images("![My image](/images/my_image.png)")
+        self.assertListEqual(matches, [("My image", "/images/my_image.png")])
+
+    def test_extract_markdown_links_link_only(self):
+        matches = extract_markdown_links("[My link](www.mywebsite.com/my_link)")
+        self.assertListEqual(matches, [("My link", "www.mywebsite.com/my_link")])
+
     def test_extract_markdown_images(self):
         matches = extract_markdown_images(
             "This is text with an ![some image](https://i.imgur.com/zjjcJKZ.png)"
