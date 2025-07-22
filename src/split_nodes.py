@@ -2,10 +2,11 @@ from extract_markdown import extract_markdown_images, extract_markdown_links
 from textnode import TextType, TextNode
 
 
-def split_nodes_image(old_nodes):
+def split_nodes_image(nodes):
+    old_nodes = nodes.copy()
     new_nodes = []
     for node in old_nodes:
-        if not node.text_type == TextType.TEXT:
+        if node.text_type != TextType.TEXT:
             new_nodes.append(node)
             continue
         images = extract_markdown_images(node.text)
@@ -23,10 +24,11 @@ def split_nodes_image(old_nodes):
     return new_nodes
 
 
-def split_nodes_link(old_nodes):
+def split_nodes_link(nodes):
+    old_nodes = nodes.copy()
     new_nodes = []
     for node in old_nodes:
-        if not node.text_type == TextType.TEXT:
+        if node.text_type != TextType.TEXT:
             new_nodes.append(node)
             continue
         links = extract_markdown_links(node.text)
