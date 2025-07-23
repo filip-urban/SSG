@@ -13,6 +13,8 @@ def clean_directory(directory_path):
 
 
 def copy_files(source, destination):
+    if not os.path.isdir(destination):
+        os.mkdir(destination)
     clean_directory(destination)
     files = get_list_of_source_paths(source)
     for file in files:
