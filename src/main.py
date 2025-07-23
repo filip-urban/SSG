@@ -5,15 +5,15 @@ from generate_html import generate_pages_recursive
 
 
 def main():
-    WEBSITE_DIREFTORY = "docs"
+    WEBSITE_DIRECTORY = "docs/"
 
     basepath = "/"
     if len(sys.argv) > 1:
         basepath = sys.argv[1]
     print(basepath)
-    clean_directory(WEBSITE_DIREFTORY)
-    copy_files("static/", WEBSITE_DIREFTORY)
-    generate_pages_recursive("content", "template.html", WEBSITE_DIREFTORY, basepath)
+    clean_directory(WEBSITE_DIRECTORY)
+    copy_files("static/", WEBSITE_DIRECTORY)
+    generate_pages_recursive("content/", "template.html", WEBSITE_DIRECTORY, basepath)
 
 
 if __name__ == "__main__":
