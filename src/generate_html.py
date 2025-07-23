@@ -4,6 +4,7 @@ import pathlib
 
 from block_to_html import markdown_to_html_node
 from extract_markdown import extract_title
+from copy_dir_contents import get_list_of_source_paths
 
 
 def read_file(filename):
@@ -29,3 +30,17 @@ def generate_page(from_path, template_path, dest_path):
     except OSError as err:
         print(err)
         sys.exit(1)
+
+
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+    content_paths = get_list_of_source_paths(dir_path_content)
+    for path in content_paths:
+        dest_path = path.replace(dir_path_content, dest_dir_path, 1)
+        if path[-1] == "/":
+            os.mkdir(dest_path)
+        else:
+            if dest_path[-3:] == ".md":
+                dest_path = dest_path[:-3] + ".html"
+            else:
+                dest_path = dest_path + ".html"
+            generate_page(path, template_path, dest_path)

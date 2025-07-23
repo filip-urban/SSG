@@ -28,6 +28,8 @@ def copy_files(source, destination):
 
 def get_list_of_source_paths(source):
     files_result = []
+    if source[-1] != "/":
+        source += "/"
     files = os.listdir(source)
     for file in files:
         file_path = source + file
